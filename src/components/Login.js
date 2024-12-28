@@ -13,6 +13,11 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // Ajouter cette fonction de validation
+  const isFormValid = () => {
+    return email.trim() !== '' && password.trim() !== '';
+  };
+
   const handleEmailLogin = (e) => {
     e.preventDefault();
     console.log('Email login:', email, password);
@@ -48,6 +53,19 @@ const Login = () => {
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '&:hover fieldset': {
+                  borderColor: '#f97316',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#f97316',
+                },
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#f97316',
+              },
+            }}
           />
           <TextField
             margin="normal"
@@ -60,12 +78,36 @@ const Login = () => {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '&:hover fieldset': {
+                  borderColor: '#f97316',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#f97316',
+                },
+              },
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#f97316',
+              },
+            }}
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            disabled={!isFormValid()}
+            sx={{ 
+              mt: 3, 
+              mb: 2,
+              backgroundColor: '#f97316',
+              '&:hover': {
+                backgroundColor: '#fb923c',
+              },
+              '&.Mui-disabled': {
+                backgroundColor: 'rgba(249, 115, 22, 0.3)',
+              }
+            }}
           >
             Login
           </Button>
@@ -78,17 +120,44 @@ const Login = () => {
           variant="outlined"
           startIcon={<GoogleIcon />}
           onClick={handleGoogleLogin}
+          sx={{
+            borderColor: '#f97316',
+            color: '#f97316',
+            '&:hover': {
+              borderColor: '#fb923c',
+              backgroundColor: 'rgba(249, 115, 22, 0.04)',
+            },
+          }}
         >
           Continue with Google
         </Button>
 
-        <Box sx={{ mt: 2 }}>
+        <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
           <Button
             color="primary"
             size="small"
+            sx={{ color: '#f97316' }}
           >
             Forgot password?
           </Button>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+            <Typography variant="body2">
+              Don't have an account?
+            </Typography>
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{ 
+                backgroundColor: '#f97316',
+                '&:hover': {
+                  backgroundColor: '#fb923c',
+                },
+                minWidth: '200px'
+              }}
+            >
+              Sign up
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Container>
