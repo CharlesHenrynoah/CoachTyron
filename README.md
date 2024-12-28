@@ -1,2 +1,0 @@
-# CoachTyron
-AI Fitness App
